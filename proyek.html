@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f4ee">
+    <meta name="description" content="Katalog proyek rekayasa perangkat lunak dan kecerdasan buatan oleh Rafli Adi Septiyan.">
+    <title>Proyek — Rafli Adi Septiyan</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Plus Jakarta Sans & Fira Code -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        cream: '#f6f4ee',
+                        ink: {
+                            DEFAULT: '#1c1917',
+                            muted: '#57534e',
+                            subtle: '#78716c',
+                        }
+                    },
+                    borderRadius: {
+                        '3xl': '1.75rem',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Styles -->
+    <style>
+        body {
+            background-color: #f6f4ee;
+            color: #1c1917;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .bento-card {
+            background-color: #ffffff;
+            border: 1px solid rgba(28, 25, 23, 0.07);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 6px 16px -4px rgba(0, 0, 0, 0.04);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+        }
+
+        .bento-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05), 0 12px 24px -6px rgba(0, 0, 0, 0.06);
+            border-color: rgba(28, 25, 23, 0.14);
+        }
+
+        .bottom-nav-safe {
+            padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-stone-900 selection:text-white min-h-screen">
+
+    <!-- ================================================================= -->
+    <!-- TOP HEADER                                                        -->
+    <!-- ================================================================= -->
+    <header class="sticky top-3 z-40 max-w-5xl mx-auto px-4 mt-3">
+        <div class="flex items-center justify-between bg-white/85 backdrop-blur-md border border-stone-200/70 rounded-full px-4 sm:px-6 py-2.5 shadow-sm">
+            <a href="index.html" class="flex items-center gap-2.5 group focus:outline-none focus:ring-2 focus:ring-stone-900 rounded-full pr-2" aria-label="Beranda">
+                <span class="w-8 h-8 rounded-full bg-stone-900 text-white font-bold text-sm flex items-center justify-center transition group-hover:scale-105">r.</span>
+                <span class="font-bold text-sm sm:text-base tracking-tight text-stone-900">rafliadis</span>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center gap-1 text-xs font-semibold text-stone-600" aria-label="Navigasi Header">
+                <a href="index.html" class="px-3 py-1.5 rounded-full hover:text-stone-900 hover:bg-stone-100 transition">Beranda</a>
+                <a href="tentang.html" class="px-3 py-1.5 rounded-full hover:text-stone-900 hover:bg-stone-100 transition">Tentang</a>
+                <a href="proyek.html" class="px-3 py-1.5 rounded-full bg-stone-900 text-white">Proyek</a>
+                <a href="toolkit.html" class="px-3 py-1.5 rounded-full hover:text-stone-900 hover:bg-stone-100 transition">Toolkit</a>
+                <a href="terminal.html" class="px-3 py-1.5 rounded-full hover:text-stone-900 hover:bg-stone-100 transition">Terminal</a>
+                <a href="kontak.html" class="px-3 py-1.5 rounded-full hover:text-stone-900 hover:bg-stone-100 transition">Kontak</a>
+            </nav>
+
+            <div class="flex items-center gap-2 sm:gap-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] sm:text-xs font-medium bg-emerald-50 text-emerald-800 border border-emerald-200/80">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="hidden lg:inline">Terbuka untuk Magang IT / Freelance / Kolaborasi</span>
+                    <span class="hidden sm:inline lg:hidden">Terbuka untuk Magang</span>
+                    <span class="inline sm:hidden">Tersedia</span>
+                </div>
+
+                <a href="CV_RAFLIADIS.pdf" download class="inline-flex items-center gap-1.5 bg-stone-900 text-white text-xs font-medium px-3.5 py-1.5 sm:px-4 sm:py-2 rounded-full hover:bg-stone-800 focus:outline-none focus:ring-2 focus:ring-stone-900 transition shadow-sm" aria-label="Unduh CV">
+                    <span>CV</span>
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================================================================= -->
+    <!-- MAIN CONTENT                                                      -->
+    <!-- ================================================================= -->
+    <main class="max-w-5xl mx-auto px-4 pt-6 pb-44 space-y-8">
+
+        <!-- Header & Filter -->
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+            <div class="space-y-1">
+                <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Portofolio Karya</span>
+                <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-stone-900">Katalog Proyek</h1>
+                <p class="text-xs sm:text-sm text-stone-600">
+                    Koleksi aplikasi web, sistem enterprise, dan eksperimen machine learning yang telah saya bangun.
+                </p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="inline-flex p-1 bg-stone-200/60 rounded-2xl border border-stone-300/40 self-start sm:self-auto" role="tablist" aria-label="Filter kategori proyek">
+                <button
+                    type="button"
+                    onclick="setProjectFilter('all')"
+                    data-filter-btn="all"
+                    class="px-4 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 bg-stone-900 text-white shadow-sm focus:outline-none"
+                >
+                    Semua (5)
+                </button>
+                <button
+                    type="button"
+                    onclick="setProjectFilter('web')"
+                    data-filter-btn="web"
+                    class="px-4 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 text-stone-600 hover:text-stone-900 focus:outline-none"
+                >
+                    Web (4)
+                </button>
+                <button
+                    type="button"
+                    onclick="setProjectFilter('ai')"
+                    data-filter-btn="ai"
+                    class="px-4 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 text-stone-600 hover:text-stone-900 focus:outline-none"
+                >
+                    AI / ML (1)
+                </button>
+            </div>
+        </div>
+
+        <!-- Bento Projects Grid -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+            <!-- 1. FEATURED: 5Hanayome (Col Span Full) -->
+            <article class="project-card bento-card rounded-3xl p-6 sm:p-7 md:col-span-2 flex flex-col justify-between border-stone-300/80 bg-gradient-to-br from-white via-white to-pink-50/40 relative overflow-hidden" data-category="web">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between gap-2">
+                        <div class="flex items-center gap-2">
+                            <span class="px-3 py-1 rounded-full text-[10px] font-bold tracking-wider uppercase bg-pink-100 text-pink-700 border border-pink-200">
+                                Featured Project
+                            </span>
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase bg-stone-100 text-stone-600">
+                                Web
+                            </span>
+                        </div>
+                        <a href="https://rafliadis.github.io/5Hanayome/" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-stone-900 transition p-1" aria-label="Buka demo 5Hanayome">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-stone-900">
+                            🌸 5Hanayome · Anime Fan Portal
+                        </h2>
+                        <p class="text-sm text-stone-600 mt-2 leading-relaxed max-w-3xl">
+                            Website fan portal anime The Quintessential Quintuplets dengan info karakter, staff &amp; cast, berita, dan jukebox lagu tema.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5" aria-label="Teknologi yang digunakan">
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg border border-stone-200/50">Laravel</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg border border-stone-200/50">PHP</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg border border-stone-200/50">Tailwind CSS</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg border border-stone-200/50">JavaScript</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg border border-stone-200/50">GitHub Pages</span>
+                    </div>
+                    <a href="https://rafliadis.github.io/5Hanayome/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-bold text-stone-900 hover:text-sky-600 transition self-start sm:self-auto">
+                        <span>Kunjungi Portal Demo</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 2. SI-JAGA Monitoring -->
+            <article class="project-card bento-card rounded-3xl p-6 flex flex-col justify-between" data-category="web">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase bg-blue-50 text-blue-700 border border-blue-200">
+                            Web
+                        </span>
+                        <a href="https://github.com/DERRYLEN/SI-JAGA" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-stone-900 transition p-1" aria-label="Buka repositori SI-JAGA">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <h2 class="text-lg font-bold text-stone-900">🛡️ SI-JAGA Monitoring</h2>
+                    <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                        Sistem Informasi Monitoring venue &amp; gedung kesenian dengan kontrol status acara dan alur pemesanan tempat.
+                    </p>
+                </div>
+
+                <div class="mt-5 pt-3 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">CodeIgniter 4</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">PHP</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">MySQL</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">Bootstrap</span>
+                    </div>
+                    <a href="https://github.com/DERRYLEN/SI-JAGA" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-sky-600 transition self-start sm:self-auto">
+                        <span>Lihat Kode</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 3. Facial Feature Analysis (AI) -->
+            <article class="project-card bento-card rounded-3xl p-6 flex flex-col justify-between" data-category="ai">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase bg-purple-50 text-purple-700 border border-purple-200">
+                            AI / ML
+                        </span>
+                        <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-stone-900 transition p-1" aria-label="Buka repositori AI Facial Feature Analysis">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <h2 class="text-lg font-bold text-stone-900">🧑‍🎨 Visual Facial Feature Analysis</h2>
+                    <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                        Sistem analisis fitur wajah interaktif berbasis Convolutional Neural Network (MobileNetV2) secara real-time.
+                    </p>
+                </div>
+
+                <div class="mt-5 pt-3 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">Python</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">Streamlit</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">TensorFlow</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">OpenCV</span>
+                    </div>
+                    <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-sky-600 transition self-start sm:self-auto">
+                        <span>Lihat Kode</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 4. Kyu-Pay Payroll System -->
+            <article class="project-card bento-card rounded-3xl p-6 flex flex-col justify-between" data-category="web">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase bg-amber-50 text-amber-700 border border-amber-200">
+                            Web
+                        </span>
+                        <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-stone-900 transition p-1" aria-label="Buka repositori Kyu-Pay">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <h2 class="text-lg font-bold text-stone-900">💸 Kyu-Pay Payroll System</h2>
+                    <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                        Aplikasi manajemen penggajian karyawan berbasis web multi-user dengan sistem hak akses (RBAC).
+                    </p>
+                </div>
+
+                <div class="mt-5 pt-3 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">CodeIgniter 4</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">MySQL</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">Tailwind CSS</span>
+                    </div>
+                    <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-sky-600 transition self-start sm:self-auto">
+                        <span>Lihat Kode</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- 5. SIMPATIK -->
+            <article class="project-card bento-card rounded-3xl p-6 flex flex-col justify-between" data-category="web">
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase bg-emerald-50 text-emerald-700 border border-emerald-200">
+                            Web
+                        </span>
+                        <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="text-stone-400 hover:text-stone-900 transition p-1" aria-label="Buka repositori SIMPATIK">
+                            <i data-lucide="github" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                    <h2 class="text-lg font-bold text-stone-900">🏢 SIMPATIK</h2>
+                    <p class="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                        Sistem pelaporan dan manajemen keluhan fasilitas gedung.
+                    </p>
+                </div>
+
+                <div class="mt-5 pt-3 border-t border-stone-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div class="flex flex-wrap gap-1.5">
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">PHP</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">MySQL</span>
+                        <span class="text-[11px] font-mono bg-stone-100 text-stone-800 px-2.5 py-0.5 rounded-lg">Bootstrap</span>
+                    </div>
+                    <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-xs font-semibold text-stone-900 hover:text-sky-600 transition self-start sm:self-auto">
+                        <span>Lihat Kode</span>
+                        <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="text-center text-xs text-stone-500 space-y-2 pt-6 border-t border-stone-200/60">
+            <div class="flex flex-wrap justify-center gap-3 text-stone-600 font-medium">
+                <a href="index.html" class="hover:text-stone-900">Beranda</a>
+                <span>•</span>
+                <a href="tentang.html" class="hover:text-stone-900">Tentang</a>
+                <span>•</span>
+                <a href="proyek.html" class="text-stone-900 font-bold">Proyek</a>
+                <span>•</span>
+                <a href="toolkit.html" class="hover:text-stone-900">Toolkit</a>
+                <span>•</span>
+                <a href="terminal.html" class="hover:text-stone-900">Terminal</a>
+                <span>•</span>
+                <a href="kontak.html" class="hover:text-stone-900">Kontak</a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Rafli Adi Septiyan. Seluruh hak cipta dilindungi.</p>
+        </footer>
+
+    </main>
+
+    <!-- ================================================================= -->
+    <!-- FLOATING BOTTOM NAVIGATION BAR                                    -->
+    <!-- ================================================================= -->
+    <nav class="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-lg border border-stone-200/80 p-1.5 rounded-full shadow-2xl flex items-center gap-1 bottom-nav-safe" aria-label="Navigasi Utama">
+        <a href="index.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 transition">
+            <i data-lucide="home" class="w-4 h-4"></i>
+            <span class="text-[11px] hidden sm:inline">Beranda</span>
+        </a>
+        <a href="tentang.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 transition">
+            <i data-lucide="user" class="w-4 h-4"></i>
+            <span class="text-[11px] hidden sm:inline">Tentang</span>
+        </a>
+        <a href="proyek.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-stone-900 text-white shadow-sm">
+            <i data-lucide="folder-git-2" class="w-4 h-4"></i>
+            <span class="text-[11px] hidden sm:inline">Proyek</span>
+        </a>
+        <a href="toolkit.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 transition">
+            <i data-lucide="layers" class="w-4 h-4"></i>
+            <span class="text-[11px] hidden sm:inline">Toolkit</span>
+        </a>
+        <a href="terminal.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 transition">
+            <i data-lucide="terminal" class="w-4 h-4"></i>
+            <span class="text-[11px] hidden sm:inline">Terminal</span>
+        </a>
+        <a href="kontak.html" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium text-stone-600 hover:text-stone-900 transition">
+            <i data-lucide="send" class="w-4 h-4"></i>
+            <span class="text-[11px] hidden sm:inline">Kontak</span>
+        </a>
+    </nav>
+
+    <!-- INLINE SCRIPT: FILTER & ICONS -->
+    <script>
+        function setProjectFilter(category) {
+            const cards = document.querySelectorAll('.project-card');
+            const buttons = document.querySelectorAll('[data-filter-btn]');
+
+            buttons.forEach(btn => {
+                const btnCategory = btn.getAttribute('data-filter-btn');
+                if (btnCategory === category) {
+                    btn.className = 'px-4 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 bg-stone-900 text-white shadow-sm focus:outline-none';
+                } else {
+                    btn.className = 'px-4 py-1.5 text-xs font-semibold rounded-xl transition-all duration-200 text-stone-600 hover:text-stone-900 focus:outline-none';
+                }
+            });
+
+            cards.forEach(card => {
+                const cardCat = card.getAttribute('data-category');
+                const isMatch = (category === 'all' || cardCat === category);
+
+                if (isMatch) {
+                    card.classList.remove('hidden');
+                    void card.offsetWidth;
+                    card.style.opacity = '1';
+                    card.style.transform = 'scale(1)';
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.97)';
+                    setTimeout(() => {
+                        if (card.style.opacity === '0') {
+                            card.classList.add('hidden');
+                        }
+                    }, 200);
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('current-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+            if (window.lucide) lucide.createIcons();
+        });
+    </script>
+</body>
+</html>

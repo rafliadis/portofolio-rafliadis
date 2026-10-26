@@ -1,0 +1,1564 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#dededb">
+    <meta name="description" content="Portofolio resmi Rafli Adi Septiyan — Software Engineering Student • Web & AI Enthusiast (S1 Informatika UBSI).">
+    <title>Rafli Adi Septiyan — Editorial Portfolio</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts: Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        canvas: '#dededb',
+                        cardBg: '#f0f0ed',
+                        bgDark: '#0f0f0f',
+                        surface: '#1a1a1a',
+                        accent: '#ff5a3c',
+                        textMuted: '#8a8a8a',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom Editorial Styles -->
+    <style>
+        :root {
+            --canvas: #e4e4e2;
+            --card-bg: #dcdcda;
+            --bg: #0f0f0f;
+            --surface: #1a1a1a;
+            --border: rgba(255, 255, 255, 0.10);
+            --text: #f5f5f5;
+            --muted: #8a8a8a;
+            --accent: #ff5a3c;
+            --skill-card-bg: #121212;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Hero Section & Device Frame (Editorial Wireframe Persis Target) */
+        #beranda {
+            background-color: #e4e4e2;
+            overflow-x: clip;
+            position: relative;
+            isolation: isolate; /* Pastikan blending context terisolasi pada latar terang #e4e4e2 / #dcdcda, tidak tembus ke body #0f0f0f */
+        }
+
+        .hero-device-card {
+            border: 4px solid #000000;
+            border-radius: 1.5rem;
+            background-color: #dcdcda;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.22);
+            position: relative;
+        }
+
+        @media (min-width: 640px) {
+            .hero-device-card {
+                border-width: 5px;
+                border-radius: 1.5rem;
+            }
+        }
+
+        /* Hero Giant Name (Mix-Blend Difference) */
+        .hero-giant-name {
+            font-size: clamp(5rem, 24vw, 20rem);
+            font-weight: 500;
+            letter-spacing: -0.06em;
+            line-height: 0.8;
+            color: #ffffff;
+            mix-blend-mode: difference;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        /* Hero Sub-Role (Mix-Blend Difference) */
+        .hero-blend-text {
+            color: #ffffff;
+            mix-blend-mode: difference;
+        }
+
+        /* Hero Portrait Cutout */
+        .hero-portrait-img {
+            height: 100%;
+            max-height: 92%;
+            width: auto;
+            object-fit: contain;
+            object-position: bottom center;
+            filter: grayscale(1) contrast(1.10);
+            user-select: none;
+            pointer-events: none;
+        }
+
+        /* Outline Text for Toolkit Services */
+        .text-outline-giant {
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 0.85;
+            transition: -webkit-text-stroke 0.3s ease;
+        }
+
+        .group:hover .text-outline-giant {
+            -webkit-text-stroke: 1.5px var(--accent);
+        }
+
+        /* Device Frame Dark (Featured Project & Terminal) */
+        .device-frame-dark {
+            border: 5px solid #2a2a2a;
+            border-radius: 2rem;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Custom Scrollbar for Terminal */
+        #terminal-output::-webkit-scrollbar {
+            width: 5px;
+        }
+        #terminal-output::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        #terminal-output::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 9999px;
+        }
+
+        /* Safe area inset for floating nav */
+        .bottom-nav-safe {
+            padding-bottom: max(0.6rem, env(safe-area-inset-bottom));
+        }
+
+        /* ===== Keahlian ===== */
+        .skill-card {
+            background-color: var(--skill-card-bg, #121212);
+            position: relative;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            transition: border-color 0.4s ease, transform 0.25s cubic-bezier(0.2, 0, 0, 1), box-shadow 0.4s ease;
+            will-change: transform;
+            overflow: hidden;
+            background-image: radial-gradient(450px circle at var(--mx, -1000px) var(--my, -1000px), rgba(255, 90, 60, 0.08), transparent 70%);
+        }
+
+        .skill-card:hover {
+            border-color: rgba(255, 90, 60, 0.35);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Parallax & Accent on Category Number */
+        .skill-card:hover .skill-num {
+            -webkit-text-stroke: 1.5px var(--accent);
+            transform: translate(3px, -2px);
+        }
+
+        .skill-num {
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.22);
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 0.85;
+            transition: -webkit-text-stroke 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            will-change: transform;
+        }
+
+        /* Scroll Reveal Bertingkat */
+        .skill-reveal-init {
+            opacity: 0;
+            transform: translateY(24px);
+            filter: blur(4px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .skill-reveal-active {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+        }
+
+        /* Stagger Chip Reveal */
+        .skill-chip {
+            opacity: 0;
+            transform: translateY(12px) scale(0.96);
+            transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, background-color 0.25s ease;
+            transition-delay: calc(var(--i, 0) * 40ms);
+            will-change: transform, opacity;
+        }
+
+        .skill-reveal-active .skill-chip {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* Hover Chip */
+        .skill-chip:hover {
+            transform: translateY(-2.5px);
+            border-color: rgba(255, 90, 60, 0.45);
+            background-color: rgba(255, 255, 255, 0.08);
+        }
+
+        .skill-chip:active {
+            transform: scale(0.95);
+        }
+
+        /* Spring scale & rotate on logo badge */
+        .skill-chip:hover .skill-badge {
+            transform: scale(1.10) rotate(6deg);
+            border-color: rgba(255, 90, 60, 0.35);
+        }
+
+        .skill-badge {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.3s ease;
+            will-change: transform;
+        }
+
+        /* Floating Idle (hanya saat in-view) */
+        @keyframes skill-float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3.5px); }
+        }
+
+        .skill-in-view .skill-badge-float {
+            animation: skill-float 5s ease-in-out infinite;
+            animation-delay: var(--d, 0s);
+        }
+
+        /* Marquee Strip */
+        .skill-marquee-container {
+            overflow: hidden;
+            position: relative;
+            mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+        }
+
+        .skill-marquee-track {
+            display: flex;
+            width: max-content;
+            gap: 1.5rem;
+            animation: skill-marquee 32s linear infinite;
+            will-change: transform;
+        }
+
+        .skill-marquee-container:hover .skill-marquee-track {
+            animation-play-state: paused;
+        }
+
+        @keyframes skill-marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+
+        /* Respect Reduced Motion */
+        @media (prefers-reduced-motion: reduce) {
+            .skill-reveal-init,
+            .skill-chip {
+                opacity: 1 !important;
+                transform: none !important;
+                filter: none !important;
+                transition: none !important;
+            }
+            .skill-card {
+                transform: none !important;
+                background-image: none !important;
+                transition: none !important;
+            }
+            .skill-card:hover .skill-num {
+                transform: none !important;
+            }
+            .skill-chip:hover {
+                transform: none !important;
+            }
+            .skill-chip:hover .skill-badge {
+                transform: none !important;
+            }
+            .skill-badge-float {
+                animation: none !important;
+            }
+            .skill-marquee-track {
+                animation: none !important;
+                flex-wrap: wrap !important;
+                justify-content: center !important;
+                width: 100% !important;
+            }
+            .skill-marquee-container {
+                mask-image: none !important;
+                -webkit-mask-image: none !important;
+            }
+            * {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body class="selection:bg-[#ff5a3c] selection:text-black">
+
+    <!-- ================================================================= -->
+    <!-- TOP STICKY BAR (Hanya muncul saat scroll ke bawah lewat hero)     -->
+    <!-- ================================================================= -->
+    <header id="top-sticky-bar" class="fixed top-0 left-0 right-0 z-40 bg-[#0f0f0f]/85 backdrop-blur-md border-b border-white/10 transition-all duration-300 opacity-0 pointer-events-none">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 sm:h-16 flex items-center justify-between">
+            <a href="#beranda" class="flex items-center gap-2 group focus:outline-none" aria-label="Ke Beranda">
+                <span class="w-7 h-7 rounded-full bg-white text-black font-bold text-xs flex items-center justify-center font-mono group-hover:bg-[#ff5a3c] transition-colors">r.</span>
+                <span class="font-mono text-xs font-semibold tracking-wider uppercase text-white/90 group-hover:text-white">&copy; rafliadis</span>
+            </a>
+
+            <!-- Badge Ketersediaan & CV -->
+            <div class="flex items-center gap-3">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono bg-white/5 border border-white/10 text-white/90">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <span class="hidden sm:inline">Terbuka untuk Magang IT / Freelance / Kolaborasi</span>
+                    <span class="inline sm:hidden">Tersedia</span>
+                </div>
+
+                <a href="CV_RAFLIADIS.pdf" download="CV_RAFLIADIS.pdf" class="inline-flex items-center gap-1.5 px-3.5 py-1 sm:px-4 sm:py-1.5 rounded-full border border-white/30 text-white font-mono text-xs hover:border-[#ff5a3c] hover:bg-[#ff5a3c] hover:text-black transition-all focus:outline-none focus:ring-2 focus:ring-[#ff5a3c]" aria-label="Unduh CV (PDF)">
+                    <span>CV</span>
+                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ================================================================= -->
+    <!-- 3. HERO (id="beranda") — PERSIS SEPERTI GAMBAR REFERENSI          -->
+    <!-- ================================================================= -->
+    <section id="beranda" class="w-full relative overflow-x-clip pt-20 sm:pt-24 pb-32 sm:pb-36 px-3 sm:px-6 lg:px-8 flex justify-center items-center bg-[#e4e4e2]">
+
+        <!-- Container Relatif dengan Overflow Khusus agar Teks Menembus Border -->
+        <div class="relative w-full max-w-5xl flex flex-col items-center justify-center gap-6">
+
+            <!-- KARTU BINGKAI PERANGKAT (DEVICE FRAME PERSIS GAMBAR) -->
+            <div class="hero-device-card w-full min-h-[520px] sm:min-h-[620px] lg:min-h-[660px] p-6 sm:p-10 lg:p-12 flex flex-col justify-between">
+
+                <!-- 1. BARIS ATAS KARTU: Header Identitas & Navigasi -->
+                <div class="relative flex items-center justify-between text-black font-medium select-none pointer-events-auto">
+                    <!-- Kiri: Copyright Label -->
+                    <span class="font-sans text-xs sm:text-sm lg:text-base tracking-tight font-bold">
+                        &copy; Rafliadis — Dev &amp; AI
+                    </span>
+
+                    <!-- Kanan: Navigasi Teks Minimalis -->
+                    <nav class="flex items-center gap-4 sm:gap-7 lg:gap-9 text-xs sm:text-sm lg:text-base font-semibold" aria-label="Navigasi Hero">
+                        <a href="#tentang" class="hover:text-[#ff5a3c] transition-colors">Tentang</a>
+                        <a href="#proyek" class="hover:text-[#ff5a3c] transition-colors">Proyek</a>
+                        <a href="#toolkit" class="hover:text-[#ff5a3c] transition-colors">Toolkit</a>
+                        <a href="#kontak" class="hover:text-[#ff5a3c] transition-colors">Kontak</a>
+                    </nav>
+                </div>
+
+                <!-- 2. FOTO PROFIL CUTOUT PNG TRANSPARAN (Rata Bawah Bingkai, Filter Grayscale) -->
+                <div id="hero-portrait-wrapper" class="absolute inset-x-0 bottom-0 flex items-end justify-center pointer-events-none select-none overflow-hidden rounded-b-[1.3rem] h-[88%] sm:h-[92%]">
+                    <img
+                        src="assets/profile.png"
+                        alt="Foto Rafli Adi Septiyan"
+                        width="780"
+                        height="1080"
+                        fetchpriority="high"
+                        loading="eager"
+                        class="hero-portrait-img"
+                        onerror="this.style.display='none';"
+                    >
+                </div>
+
+                <!-- 3. TEKS NAMA RAKSASA: INVERTED MIX-BLEND-DIFFERENCE (Menembus Tepi Kiri-Kanan) -->
+                <!-- Di atas latar terang menjadi gelap, di atas siluet foto menjadi putih terang -->
+                <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none overflow-visible">
+                    <h1 class="hero-giant-name whitespace-nowrap">
+                        Rafliadis
+                    </h1>
+                </div>
+
+                <!-- 4. BARIS BAWAH KARTU: Sosial Vertikal & Peran Dua Baris -->
+                <div class="relative flex items-end justify-between pt-4 pointer-events-auto">
+
+                    <!-- Kiri Bawah: Ikon Sosial Vertikal (GitHub, Instagram, Mail) -->
+                    <div class="flex flex-col gap-2 sm:gap-2.5 select-none" aria-label="Tautan Sosial">
+                        <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold font-sans text-xs hover:bg-[#ff5a3c] transition-colors shadow-sm" aria-label="GitHub">
+                            G
+                        </a>
+                        <a href="https://instagram.com/rafliadis.__" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold font-sans text-xs hover:bg-[#ff5a3c] transition-colors shadow-sm" aria-label="Instagram">
+                            I
+                        </a>
+                        <a href="mailto:rafliadiseptiyan202@gmail.com" class="w-8 h-8 rounded-lg bg-black text-white flex items-center justify-center font-bold font-sans text-xs hover:bg-[#ff5a3c] transition-colors shadow-sm" aria-label="Email">
+                            @
+                        </a>
+                    </div>
+
+                    <!-- Kanan Bawah: Teks Dua Baris Besar (Teknik Blend Sama) & Lokasi Mono -->
+                    <div class="text-right select-none">
+                        <div class="hero-blend-text text-xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.05]">
+                            <span class="block">Software Engineer</span>
+                            <span class="block">Web &amp; AI Enthusiast</span>
+                        </div>
+                        <p class="font-mono text-[10px] sm:text-xs text-black/60 mt-2 tracking-wider">
+                            BEKASI, INDONESIA &middot; UBSI SEMESTER 7
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- GRUP TOMBOL CTA HERO (Unduh CV & Lihat Proyek) -->
+            <div class="w-full flex flex-wrap items-center justify-center sm:justify-start gap-3 pt-2">
+                <a href="CV_RAFLIADIS.pdf" download="CV_RAFLIADIS.pdf" aria-label="Unduh CV (PDF)" class="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#ff5a3c] text-black font-mono text-xs font-semibold hover:bg-black hover:text-white transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-[#ff5a3c]">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Unduh CV</span>
+                </a>
+                <a href="#proyek" class="w-full sm:w-auto min-h-[44px] inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full border border-black/25 text-black font-mono text-xs font-medium hover:border-black hover:bg-black/5 transition-all focus:outline-none focus:ring-2 focus:ring-black">
+                    <span>Lihat Proyek</span>
+                    <i data-lucide="arrow-down" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ================================================================= -->
+    <!-- MAIN CONTENT WRAPPER (pb-44 agar tidak tertutup bottom nav)       -->
+    <!-- ================================================================= -->
+    <main class="max-w-5xl mx-auto px-4 sm:px-6 pt-16 pb-44 space-y-28">
+
+        <!-- ============================================================= -->
+        <!-- 4. TENTANG (id="tentang") — LATAR GELAP EDITORIAL             -->
+        <!-- ============================================================= -->
+        <section id="tentang" class="scroll-mt-28 space-y-10">
+            <!-- Label Seksi -->
+            <div class="flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#ff5a3c]">// Tentang</span>
+                <div class="h-px bg-white/10 flex-1"></div>
+            </div>
+
+            <!-- Headline Besar Editorial -->
+            <div class="space-y-6">
+                <h2 class="text-2xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.08] max-w-4xl">
+                    Saya mahasiswa Informatika yang <span class="text-[#ff5a3c]">membangun aplikasi Web, Mobile, dan integrasi AI</span> dengan arsitektur bersih dan performa terukur.
+                </h2>
+                <p class="text-sm sm:text-base text-[#8a8a8a] leading-relaxed max-w-3xl">
+                    Berbasis di Bekasi, Jawa Barat, saya mendalami siklus rekayasa perangkat lunak menyeluruh. Mulai dari backend tangguh dengan PHP (Laravel, CodeIgniter 4), pembuatan aplikasi mobile lintas platform dengan Flutter, hingga integrasi model computer vision real-time berbasis Python dan TensorFlow (MobileNetV2).
+                </p>
+                <div>
+                    <a href="#proyek" class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-white/20 font-mono text-xs hover:border-[#ff5a3c] hover:bg-[#ff5a3c] hover:text-black transition-all">
+                        <span>Lihat Proyek Pilihan</span>
+                        <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 3 Kartu Bento Kecil (Data Nyata Saja) -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+                <div class="p-6 rounded-3xl bg-[#1a1a1a] border border-white/10 hover:-translate-y-1 transition-transform">
+                    <span class="font-mono text-xs text-[#8a8a8a] block">01 / PORTOFOLIO</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-2">5 Proyek</h3>
+                    <p class="text-xs text-[#8a8a8a] mt-1">Sistem informasi, fan portal, AI vision, &amp; enterprise payroll.</p>
+                </div>
+                <div class="p-6 rounded-3xl bg-[#1a1a1a] border border-white/10 hover:-translate-y-1 transition-transform">
+                    <span class="font-mono text-xs text-[#8a8a8a] block">02 / SPESIALISASI</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-[#ff5a3c] mt-2">Web · Mobile · AI</h3>
+                    <p class="text-xs text-[#8a8a8a] mt-1">3 fokus pilar rekayasa perangkat lunak.</p>
+                </div>
+                <div class="p-6 rounded-3xl bg-[#1a1a1a] border border-white/10 hover:-translate-y-1 transition-transform">
+                    <span class="font-mono text-xs text-[#8a8a8a] block">03 / AKADEMIK</span>
+                    <h3 class="text-2xl sm:text-3xl font-bold tracking-tight text-white mt-2">Semester 7</h3>
+                    <p class="text-xs text-[#8a8a8a] mt-1">S1 Informatika — Universitas Bina Sarana Informatika.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 5. PROYEK (id="proyek") + FILTER INTERAKTIF                   -->
+        <!-- ============================================================= -->
+        <section id="proyek" class="scroll-mt-28 space-y-10">
+            <!-- Label Seksi & Filter Buttons -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <span class="font-mono text-xs uppercase tracking-widest text-[#ff5a3c]">// Proyek</span>
+                    <div class="h-px bg-white/10 flex-1"></div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                    <div>
+                        <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white">Karya Terpilih</h2>
+                        <p class="text-xs sm:text-sm text-[#8a8a8a] font-mono mt-1">05 HASIL PENGEMBANGAN SISTEM &amp; PENELITIAN</p>
+                    </div>
+
+                    <!-- Filter Pill Buttons -->
+                    <div class="inline-flex p-1 rounded-full border border-white/10 bg-[#141414]" role="tablist" aria-label="Filter kategori proyek">
+                        <button
+                            type="button"
+                            onclick="filterProjects('all')"
+                            data-filter="all"
+                            class="filter-pill active px-4 py-1 rounded-full font-mono text-xs font-semibold bg-[#ff5a3c] text-black transition-all"
+                        >
+                            Semua (5)
+                        </button>
+                        <button
+                            type="button"
+                            onclick="filterProjects('web')"
+                            data-filter="web"
+                            class="filter-pill px-4 py-1 rounded-full font-mono text-xs text-[#8a8a8a] hover:text-white transition-all"
+                        >
+                            Web (4)
+                        </button>
+                        <button
+                            type="button"
+                            onclick="filterProjects('ai')"
+                            data-filter="ai"
+                            class="filter-pill px-4 py-1 rounded-full font-mono text-xs text-[#8a8a8a] hover:text-white transition-all"
+                        >
+                            AI / ML (1)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CONTAINER PROYEK (FEATURED + TABLE LIST) -->
+            <div id="projects-container" class="space-y-8">
+
+                <!-- 1. FEATURED PROJECT (5Hanayome) — Device Frame -->
+                <div id="project-featured" class="project-item device-frame-dark bg-[#1a1a1a] p-6 sm:p-10 transition-all duration-300" data-category="web">
+                    <div class="flex flex-col lg:flex-row justify-between gap-8">
+                        <div class="space-y-4 max-w-2xl">
+                            <div class="flex items-center gap-3 font-mono text-xs">
+                                <span class="px-2.5 py-0.5 rounded-full bg-[#ff5a3c] text-black font-semibold">01 / FEATURED</span>
+                                <span class="text-[#8a8a8a] uppercase">WEB APP</span>
+                            </div>
+
+                            <h3 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white">
+                                🌸 5Hanayome · Anime Fan Portal
+                            </h3>
+
+                            <p class="text-sm text-[#8a8a8a] leading-relaxed">
+                                Website fan portal anime The Quintessential Quintuplets dengan info karakter, staff &amp; cast, berita, dan jukebox lagu tema.
+                            </p>
+
+                            <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/80">Laravel</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/80">PHP</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/80">Tailwind CSS</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/80">JavaScript</span>
+                                <span class="px-2.5 py-1 rounded-md bg-white/5 border border-white/10 text-white/80">GitHub Pages</span>
+                            </div>
+                        </div>
+
+                        <div class="flex lg:flex-col justify-end lg:justify-between items-start lg:items-end gap-4">
+                            <span class="text-6xl sm:text-7xl select-none opacity-80">🌸</span>
+                            <a
+                                href="https://rafliadis.github.io/5Hanayome/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#ff5a3c] text-black font-mono text-xs font-semibold hover:bg-white transition-colors"
+                            >
+                                <span>Buka Demo</span>
+                                <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2–5. PROYEK LAIN (Daftar Bergaya Tabel) -->
+                <div class="border-b border-white/10">
+
+                    <!-- 02. SI-JAGA -->
+                    <article class="project-item group border-t border-white/10 py-6 transition-all duration-200 hover:border-[#ff5a3c]" data-category="web">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex items-start gap-4 sm:gap-6">
+                                <span class="font-mono text-sm sm:text-base text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors pt-1">02</span>
+                                <div class="space-y-1">
+                                    <h4 class="text-lg sm:text-xl font-semibold text-white group-hover:text-[#ff5a3c] transition-colors flex items-center gap-2">
+                                        <span>🛡️ SI-JAGA Monitoring</span>
+                                    </h4>
+                                    <p class="text-xs sm:text-sm text-[#8a8a8a] max-w-2xl leading-relaxed">
+                                        Sistem Informasi Monitoring venue &amp; gedung kesenian dengan kontrol status acara dan alur pemesanan tempat.
+                                    </p>
+                                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-[#8a8a8a]">
+                                        <span>CodeIgniter 4</span> • <span>PHP</span> • <span>MySQL</span> • <span>Bootstrap</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between md:justify-end gap-4 pl-10 md:pl-0">
+                                <span class="font-mono text-[11px] text-[#8a8a8a] uppercase border border-white/10 px-2 py-0.5 rounded">WEB</span>
+                                <a
+                                    href="https://github.com/DERRYLEN/SI-JAGA"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 font-mono text-xs text-white group-hover:text-[#ff5a3c] transition-colors px-3 py-1.5 rounded-full border border-white/20 group-hover:border-[#ff5a3c]"
+                                    aria-label="Lihat kode SI-JAGA"
+                                >
+                                    <span>Code</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 03. Facial Feature Analysis -->
+                    <article class="project-item group border-t border-white/10 py-6 transition-all duration-200 hover:border-[#ff5a3c]" data-category="ai">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex items-start gap-4 sm:gap-6">
+                                <span class="font-mono text-sm sm:text-base text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors pt-1">03</span>
+                                <div class="space-y-1">
+                                    <h4 class="text-lg sm:text-xl font-semibold text-white group-hover:text-[#ff5a3c] transition-colors flex items-center gap-2">
+                                        <span>🧑‍🎨 Visual Facial Feature Analysis</span>
+                                    </h4>
+                                    <p class="text-xs sm:text-sm text-[#8a8a8a] max-w-2xl leading-relaxed">
+                                        Sistem analisis fitur wajah interaktif berbasis Convolutional Neural Network (MobileNetV2) secara real-time.
+                                    </p>
+                                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-[#8a8a8a]">
+                                        <span>Python</span> • <span>Streamlit</span> • <span>TensorFlow</span> • <span>OpenCV</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between md:justify-end gap-4 pl-10 md:pl-0">
+                                <span class="font-mono text-[11px] text-[#ff5a3c] uppercase border border-[#ff5a3c]/30 px-2 py-0.5 rounded">AI / ML</span>
+                                <a
+                                    href="https://github.com/rafliadis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 font-mono text-xs text-white group-hover:text-[#ff5a3c] transition-colors px-3 py-1.5 rounded-full border border-white/20 group-hover:border-[#ff5a3c]"
+                                    aria-label="Lihat repositori Facial Feature Analysis"
+                                >
+                                    <span>Code</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 04. Kyu-Pay Payroll System -->
+                    <article class="project-item group border-t border-white/10 py-6 transition-all duration-200 hover:border-[#ff5a3c]" data-category="web">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex items-start gap-4 sm:gap-6">
+                                <span class="font-mono text-sm sm:text-base text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors pt-1">04</span>
+                                <div class="space-y-1">
+                                    <h4 class="text-lg sm:text-xl font-semibold text-white group-hover:text-[#ff5a3c] transition-colors flex items-center gap-2">
+                                        <span>💸 Kyu-Pay Payroll System</span>
+                                    </h4>
+                                    <p class="text-xs sm:text-sm text-[#8a8a8a] max-w-2xl leading-relaxed">
+                                        Aplikasi manajemen penggajian karyawan berbasis web multi-user dengan sistem hak akses (RBAC).
+                                    </p>
+                                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-[#8a8a8a]">
+                                        <span>CodeIgniter 4</span> • <span>MySQL</span> • <span>Tailwind CSS</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between md:justify-end gap-4 pl-10 md:pl-0">
+                                <span class="font-mono text-[11px] text-[#8a8a8a] uppercase border border-white/10 px-2 py-0.5 rounded">WEB</span>
+                                <a
+                                    href="https://github.com/rafliadis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 font-mono text-xs text-white group-hover:text-[#ff5a3c] transition-colors px-3 py-1.5 rounded-full border border-white/20 group-hover:border-[#ff5a3c]"
+                                    aria-label="Lihat repositori Kyu-Pay"
+                                >
+                                    <span>Code</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- 05. SIMPATIK -->
+                    <article class="project-item group border-t border-white/10 py-6 transition-all duration-200 hover:border-[#ff5a3c]" data-category="web">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                            <div class="flex items-start gap-4 sm:gap-6">
+                                <span class="font-mono text-sm sm:text-base text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors pt-1">05</span>
+                                <div class="space-y-1">
+                                    <h4 class="text-lg sm:text-xl font-semibold text-white group-hover:text-[#ff5a3c] transition-colors flex items-center gap-2">
+                                        <span>🏢 SIMPATIK</span>
+                                    </h4>
+                                    <p class="text-xs sm:text-sm text-[#8a8a8a] max-w-2xl leading-relaxed">
+                                        Sistem pelaporan dan manajemen keluhan fasilitas gedung.
+                                    </p>
+                                    <div class="flex flex-wrap gap-1.5 pt-2 font-mono text-[11px] text-[#8a8a8a]">
+                                        <span>PHP</span> • <span>MySQL</span> • <span>Bootstrap</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center justify-between md:justify-end gap-4 pl-10 md:pl-0">
+                                <span class="font-mono text-[11px] text-[#8a8a8a] uppercase border border-white/10 px-2 py-0.5 rounded">WEB</span>
+                                <a
+                                    href="https://github.com/rafliadis"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="inline-flex items-center gap-1.5 font-mono text-xs text-white group-hover:text-[#ff5a3c] transition-colors px-3 py-1.5 rounded-full border border-white/20 group-hover:border-[#ff5a3c]"
+                                    aria-label="Lihat repositori SIMPATIK"
+                                >
+                                    <span>Code</span>
+                                    <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 6. TERMINAL INTERAKTIF (id="terminal")                        -->
+        <!-- ============================================================= -->
+        <section id="terminal" class="scroll-mt-28 space-y-6">
+            <!-- Label Seksi -->
+            <div class="flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#ff5a3c]">// Terminal</span>
+                <div class="h-px bg-white/10 flex-1"></div>
+            </div>
+
+            <div class="space-y-2">
+                <h2 class="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Konsol Interaktif</h2>
+                <p class="text-xs sm:text-sm text-[#8a8a8a] font-mono">Ketik <span class="text-[#ff5a3c]">bantuan</span> untuk melihat panduan baris perintah.</p>
+            </div>
+
+            <!-- Terminal Component (Device Frame Style) -->
+            <div id="terminal-window" class="device-frame-dark bg-[#0a0a0a] text-white p-5 sm:p-7 font-mono text-xs sm:text-sm cursor-text select-text">
+
+                <!-- Header macOS 3 Dots -->
+                <div class="flex items-center justify-between pb-4 mb-4 border-b border-white/10 select-none">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-[#ff5a3c]/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-amber-400/80 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-emerald-400/80 inline-block"></span>
+                        <span class="text-[#8a8a8a] text-xs ml-3 font-mono">rafliadis@portfolio:~</span>
+                    </div>
+                    <button
+                        type="button"
+                        onclick="clearTerminalScreen()"
+                        class="text-[11px] text-[#8a8a8a] hover:text-[#ff5a3c] border border-white/10 hover:border-[#ff5a3c] px-2.5 py-1 rounded-full transition"
+                    >
+                        bersihkan
+                    </button>
+                </div>
+
+                <!-- Terminal Output Area -->
+                <div id="terminal-output" class="space-y-1.5 min-h-[220px] max-h-[360px] overflow-y-auto pr-2">
+                    <p class="text-[#8a8a8a]">Selamat datang di CLI portofolio Rafli Adi Septiyan.</p>
+                    <p class="text-[#8a8a8a]">Ketik <span class="text-[#ff5a3c] font-bold">bantuan</span> lalu tekan <span class="text-white font-semibold">[Enter]</span> untuk panduan perintah.</p>
+                </div>
+
+                <!-- Form Input -->
+                <form id="terminal-form" onsubmit="executeTerminalCommand(event)" class="flex items-center gap-2 mt-4 pt-3 border-t border-white/10">
+                    <span class="text-[#ff5a3c] font-bold select-none flex-shrink-0">rafliadis@portfolio:~$</span>
+                    <input
+                        type="text"
+                        id="terminal-input"
+                        autocomplete="off"
+                        autocorrect="off"
+                        autocapitalize="off"
+                        spellcheck="false"
+                        placeholder="ketik perintah di sini..."
+                        class="bg-transparent border-none outline-none text-white w-full focus:ring-0 text-xs sm:text-sm font-mono placeholder:text-white/20"
+                        aria-label="Input baris perintah"
+                    >
+                </form>
+
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 7. LAYANAN & KEAHLIAN (id="toolkit" / id="keahlian")          -->
+        <!-- ============================================================= -->
+        <section id="toolkit" class="scroll-mt-28 space-y-8">
+            <!-- Anchor alias untuk #keahlian agar kompatibel ganda -->
+            <div id="keahlian" class="-mt-28 pt-28"></div>
+
+            <!-- Label Seksi -->
+            <div class="flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#ff5a3c]">// Layanan &amp; Keahlian</span>
+                <div class="h-px bg-white/10 flex-1"></div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-semibold tracking-tight text-white">Layanan &amp; Keahlian</h2>
+                    <p class="text-xs sm:text-sm text-[#8a8a8a] font-mono mt-1">04 STACK UTAMA DALAM MEMBANGUN APLIKASI DIGITAL</p>
+                </div>
+                <div class="text-xs font-mono text-white/50 hidden sm:block">
+                    <span>*Ikon resmi SVG via Devicon CDN</span>
+                </div>
+            </div>
+
+            <!-- 7. Marquee Logo Strip Berjalan Terus (Loop Halus) -->
+            <div class="skill-marquee-container py-3 border-y border-white/10" aria-hidden="true">
+                <div id="skill-marquee-track" class="skill-marquee-track items-center">
+                    <!-- Diisi lewat initMarquee() via JS -->
+                </div>
+            </div>
+
+            <!-- Kartu Bento Kategori & Grid Chip Teknologi (Dirender via renderSkills()) -->
+            <div id="skills-bento-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                <!-- Dirender secara dinamis oleh JavaScript -->
+            </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- 8. KONTAK & FOOTER (id="kontak")                              -->
+        <!-- ============================================================= -->
+        <section id="kontak" class="scroll-mt-28 space-y-10">
+            <!-- Label Seksi -->
+            <div class="flex items-center gap-3">
+                <span class="font-mono text-xs uppercase tracking-widest text-[#ff5a3c]">// Kontak</span>
+                <div class="h-px bg-white/10 flex-1"></div>
+            </div>
+
+            <!-- Headline Besar -->
+            <div class="space-y-3">
+                <h2 class="text-3xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white leading-tight">
+                    Ayo <span class="text-[#ff5a3c]">bikin sesuatu</span> bareng.
+                </h2>
+                <p class="text-sm text-[#8a8a8a] max-w-xl">
+                    Terbuka untuk peluang magang IT, kerja lepas (freelance), maupun proyek kolaborasi. Silakan hubungi saya melalui salah satu saluran di bawah ini.
+                </p>
+            </div>
+
+            <!-- Daftar Bergaya Tabel Baris Kontak -->
+            <div class="border-t border-b border-white/10 divide-y divide-white/10 font-mono text-xs sm:text-sm">
+
+                <!-- Email -->
+                <a href="mailto:rafliadiseptiyan202@gmail.com" class="py-5 flex items-center justify-between group hover:text-[#ff5a3c] transition-colors focus:outline-none">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <i data-lucide="mail" class="w-4 h-4 text-[#ff5a3c]"></i>
+                        <span class="text-[#8a8a8a] group-hover:text-white transition-colors">EMAIL</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-white group-hover:text-[#ff5a3c] transition-colors font-sans text-xs sm:text-sm">rafliadiseptiyan202@gmail.com</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors"></i>
+                    </div>
+                </a>
+
+                <!-- WhatsApp -->
+                <a href="https://wa.me/6283169834140" target="_blank" rel="noopener noreferrer" class="py-5 flex items-center justify-between group hover:text-[#ff5a3c] transition-colors focus:outline-none">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <i data-lucide="message-circle" class="w-4 h-4 text-[#ff5a3c]"></i>
+                        <span class="text-[#8a8a8a] group-hover:text-white transition-colors">WHATSAPP</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-white group-hover:text-[#ff5a3c] transition-colors font-sans text-xs sm:text-sm">0831-6983-4140</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors"></i>
+                    </div>
+                </a>
+
+                <!-- GitHub -->
+                <a href="https://github.com/rafliadis" target="_blank" rel="noopener noreferrer" class="py-5 flex items-center justify-between group hover:text-[#ff5a3c] transition-colors focus:outline-none">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <i data-lucide="github" class="w-4 h-4 text-[#ff5a3c]"></i>
+                        <span class="text-[#8a8a8a] group-hover:text-white transition-colors">GITHUB</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-white group-hover:text-[#ff5a3c] transition-colors font-sans text-xs sm:text-sm">github.com/rafliadis</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors"></i>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/rafliadis.__" target="_blank" rel="noopener noreferrer" class="py-5 flex items-center justify-between group hover:text-[#ff5a3c] transition-colors focus:outline-none">
+                    <div class="flex items-center gap-3 sm:gap-4">
+                        <i data-lucide="instagram" class="w-4 h-4 text-[#ff5a3c]"></i>
+                        <span class="text-[#8a8a8a] group-hover:text-white transition-colors">INSTAGRAM</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-white group-hover:text-[#ff5a3c] transition-colors font-sans text-xs sm:text-sm">@rafliadis.__</span>
+                        <i data-lucide="arrow-up-right" class="w-4 h-4 text-[#8a8a8a] group-hover:text-[#ff5a3c] transition-colors"></i>
+                    </div>
+                </a>
+
+            </div>
+
+            <!-- Tombol Unduh CV Menonjol -->
+            <div class="pt-4 flex flex-col items-start gap-2">
+                <a href="CV_RAFLIADIS.pdf" download="CV_RAFLIADIS.pdf" aria-label="Download CV (PDF)" class="group min-h-[44px] inline-flex items-center gap-3 px-6 py-3.5 rounded-full bg-[#ff5a3c] text-black font-mono text-sm font-bold shadow-lg shadow-[#ff5a3c]/20 hover:-translate-y-0.5 hover:shadow-[#ff5a3c]/40 motion-reduce:hover:translate-y-0 transition-all focus:outline-none focus:ring-2 focus:ring-[#ff5a3c] focus:ring-offset-2 focus:ring-offset-[#0f0f0f]">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Download CV (PDF)</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4 transition-transform group-hover:translate-x-1 motion-reduce:group-hover:translate-x-0"></i>
+                </a>
+                <span class="font-mono text-xs text-[#8a8a8a] pl-2">PDF &middot; &plusmn;1 halaman</span>
+            </div>
+
+            <!-- FOOTER DEKORATIF -->
+            <footer class="pt-16 pb-8 border-t border-white/10 relative overflow-hidden select-none">
+                <!-- Teks Raksasa Samar sebagai Dekorasi -->
+                <div class="absolute bottom-0 left-0 right-0 pointer-events-none opacity-[0.03] leading-none overflow-hidden whitespace-nowrap text-center">
+                    <span class="text-[clamp(6rem,25vw,22rem)] font-extrabold uppercase font-sans text-white">
+                        RAFLIADIS
+                    </span>
+                </div>
+
+                <div class="relative z-10 flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-[#8a8a8a]">
+                    <p>&copy; <span id="current-year"></span> Rafli Adi Septiyan. Seluruh hak cipta dilindungi.</p>
+                    <p class="text-[11px] text-[#8a8a8a]/70">Editorial Typographic Style • Inter &amp; JetBrains Mono</p>
+                </div>
+            </footer>
+        </section>
+
+    </main>
+
+    <!-- ================================================================= -->
+    <!-- 2. FLOATING BOTTOM NAVIGATION (Dock Minimalis Persis Gambar)      -->
+    <!-- ================================================================= -->
+    <nav class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-[#1c1c1c] border border-white/10 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full shadow-2xl flex items-center gap-6 sm:gap-8 bottom-nav-safe select-none" aria-label="Navigasi Bawah">
+        <a href="#proyek" data-nav="proyek" class="bottom-nav-item text-xs sm:text-sm font-medium text-[#d4d4d4] hover:text-white transition-colors">Proyek</a>
+        <a href="#terminal" data-nav="terminal" class="bottom-nav-item text-xs sm:text-sm font-medium text-[#d4d4d4] hover:text-white transition-colors">Terminal</a>
+        <a href="#toolkit" data-nav="toolkit" class="bottom-nav-item text-xs sm:text-sm font-medium text-[#d4d4d4] hover:text-white transition-colors">Toolkit</a>
+        <a href="#tentang" data-nav="tentang" class="bottom-nav-item text-xs sm:text-sm font-medium text-[#d4d4d4] hover:text-white transition-colors">Tentang</a>
+        <a href="#kontak" data-nav="kontak" class="bottom-nav-item text-xs sm:text-sm font-medium text-[#d4d4d4] hover:text-white transition-colors">Kontak</a>
+    </nav>
+
+    <!-- ================================================================= -->
+    <!-- JAVASCRIPT LOGIC (Vanilla JS)                                     -->
+    <!-- ================================================================= -->
+    <script>
+        // -------------------------------------------------------------
+        // SUMBER KEBENARAN TUNGGAL: Berkas CV
+        // -------------------------------------------------------------
+        const CV_FILE = 'CV_RAFLIADIS.pdf';
+
+        function downloadCV() {
+            try {
+                const a = document.createElement('a');
+                a.href = CV_FILE;
+                a.download = CV_FILE;
+                a.rel = 'noopener';
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+            } catch (err) {
+                window.open(CV_FILE, '_blank', 'noopener');
+            }
+        }
+
+        // -------------------------------------------------------------
+        // A. DATA PROYEK (Array of Objects)
+        // -------------------------------------------------------------
+        const PROJECTS_LIST = [
+            {
+                id: 1,
+                title: "🌸 5Hanayome · Anime Fan Portal",
+                category: "web",
+                description: "Website fan portal anime The Quintessential Quintuplets dengan info karakter, staff & cast, berita, dan jukebox lagu tema.",
+                tech: ["Laravel", "PHP", "Tailwind CSS", "JavaScript", "GitHub Pages"],
+                link: "https://rafliadis.github.io/5Hanayome/"
+            },
+            {
+                id: 2,
+                title: "🛡️ SI-JAGA Monitoring",
+                category: "web",
+                description: "Sistem Informasi Monitoring venue & gedung kesenian dengan kontrol status acara dan alur pemesanan tempat.",
+                tech: ["CodeIgniter 4", "PHP", "MySQL", "Bootstrap"],
+                link: "https://github.com/DERRYLEN/SI-JAGA"
+            },
+            {
+                id: 3,
+                title: "🧑‍🎨 Visual Facial Feature Analysis",
+                category: "ai",
+                description: "Sistem analisis fitur wajah interaktif berbasis Convolutional Neural Network (MobileNetV2) secara real-time.",
+                tech: ["Python", "Streamlit", "TensorFlow", "OpenCV"],
+                link: "https://github.com/rafliadis"
+            },
+            {
+                id: 4,
+                title: "💸 Kyu-Pay Payroll System",
+                category: "web",
+                description: "Aplikasi manajemen penggajian karyawan berbasis web multi-user dengan sistem hak akses (RBAC).",
+                tech: ["CodeIgniter 4", "MySQL", "Tailwind CSS"],
+                link: "https://github.com/rafliadis"
+            },
+            {
+                id: 5,
+                title: "🏢 SIMPATIK",
+                category: "web",
+                description: "Sistem pelaporan dan manajemen keluhan fasilitas gedung.",
+                tech: ["PHP", "MySQL", "Bootstrap"],
+                link: "https://github.com/rafliadis"
+            }
+        ];
+
+        // -------------------------------------------------------------
+        // B. FILTER PROYEK INTERAKTIF
+        // -------------------------------------------------------------
+        function filterProjects(category) {
+            const projectItems = document.querySelectorAll('.project-item');
+            const filterButtons = document.querySelectorAll('.filter-pill');
+
+            filterButtons.forEach(btn => {
+                if (btn.getAttribute('data-filter') === category) {
+                    btn.className = 'filter-pill active px-4 py-1 rounded-full font-mono text-xs font-semibold bg-[#ff5a3c] text-black transition-all';
+                } else {
+                    btn.className = 'filter-pill px-4 py-1 rounded-full font-mono text-xs text-[#8a8a8a] hover:text-white transition-all';
+                }
+            });
+
+            projectItems.forEach(item => {
+                const itemCat = item.getAttribute('data-category');
+                const isMatch = (category === 'all' || itemCat === category);
+
+                if (isMatch) {
+                    item.style.display = '';
+                    void item.offsetWidth;
+                    item.style.opacity = '1';
+                    item.style.transform = 'scale(1)';
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.98)';
+                    setTimeout(() => {
+                        if (item.style.opacity === '0') {
+                            item.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            });
+        }
+
+        // -------------------------------------------------------------
+        // C. TERMINAL INTERAKTIF (Aman XSS via textContent)
+        // -------------------------------------------------------------
+        const terminalOutput = document.getElementById('terminal-output');
+        const terminalInput = document.getElementById('terminal-input');
+        const terminalWindow = document.getElementById('terminal-window');
+
+        const commandHistory = [];
+        let historyIndex = -1;
+
+        if (terminalWindow && terminalInput) {
+            terminalWindow.addEventListener('click', () => {
+                if (window.getSelection().toString().length === 0) {
+                    terminalInput.focus();
+                }
+            });
+        }
+
+        function appendTerminalLine(text, cssClass = 'text-[#8a8a8a]') {
+            const p = document.createElement('p');
+            p.className = cssClass;
+            p.textContent = text;
+            terminalOutput.appendChild(p);
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        if (terminalInput) {
+            terminalInput.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (commandHistory.length > 0 && historyIndex < commandHistory.length - 1) {
+                        historyIndex++;
+                        terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        terminalInput.value = commandHistory[commandHistory.length - 1 - historyIndex];
+                    } else if (historyIndex === 0) {
+                        historyIndex = -1;
+                        terminalInput.value = '';
+                    }
+                }
+            });
+        }
+
+        function executeTerminalCommand(e) {
+            if (e) e.preventDefault();
+            const rawVal = terminalInput.value;
+            const cmd = rawVal.trim().toLowerCase();
+
+            if (!cmd) return;
+
+            commandHistory.push(rawVal);
+            historyIndex = -1;
+
+            appendTerminalLine(`rafliadis@portfolio:~$ ${rawVal}`, 'text-[#ff5a3c] font-semibold mt-2');
+
+            switch (cmd) {
+                case 'bantuan':
+                case 'help':
+                    appendTerminalLine('DAFTAR PERINTAH TERSEDIA:', 'text-white font-bold');
+                    appendTerminalLine('  bantuan / help : Menampilkan daftar perintah ini');
+                    appendTerminalLine('  proyek         : Menampilkan ringkasan 5 proyek');
+                    appendTerminalLine('  kontak         : Informasi email dan nomor WhatsApp');
+                    appendTerminalLine('  5hanayome      : Membuka demo portal anime 5Hanayome di tab baru');
+                    appendTerminalLine('  cv / download-cv: Memicu pengunduhan berkas ' + CV_FILE);
+                    appendTerminalLine('  bersihkan/clear: Membersihkan layar terminal');
+                    break;
+
+                case 'proyek':
+                    appendTerminalLine('RINGKASAN 5 PROYEK PORTOFOLIO:', 'text-white font-bold');
+                    PROJECTS_LIST.forEach((p, idx) => {
+                        appendTerminalLine(`  [${idx + 1}] ${p.title} [${p.category.toUpperCase()}]`);
+                    });
+                    break;
+
+                case 'kontak':
+                    appendTerminalLine('INFORMASI KONTAK:', 'text-white font-bold');
+                    appendTerminalLine('  Email    : rafliadiseptiyan202@gmail.com');
+                    appendTerminalLine('  WhatsApp : 0831-6983-4140');
+                    appendTerminalLine('  GitHub   : https://github.com/rafliadis');
+                    appendTerminalLine('  Instagram: https://instagram.com/rafliadis.__');
+                    break;
+
+                case '5hanayome':
+                    appendTerminalLine('Membuka https://rafliadis.github.io/5Hanayome/ di tab baru...', 'text-[#ff5a3c]');
+                    window.open('https://rafliadis.github.io/5Hanayome/', '_blank', 'noopener,noreferrer');
+                    break;
+
+                case 'cv':
+                case 'download-cv':
+                    appendTerminalLine(`Mengunduh ${CV_FILE} ...`, 'text-[#ff5a3c]');
+                    if (window.location.protocol.startsWith('http')) {
+                        fetch(CV_FILE, { method: 'HEAD' })
+                            .then(res => {
+                                if (res.ok) {
+                                    downloadCV();
+                                } else {
+                                    appendTerminalLine('File CV belum tersedia, silakan hubungi lewat kontak.', 'text-[#ff5a3c]');
+                                }
+                            })
+                            .catch(() => {
+                                downloadCV();
+                            });
+                    } else {
+                        downloadCV();
+                    }
+                    break;
+
+                case 'bersihkan':
+                case 'clear':
+                    clearTerminalScreen();
+                    terminalInput.value = '';
+                    return;
+
+                default:
+                    appendTerminalLine(`Perintah tidak dikenal: "${rawVal}".`, 'text-[#ff5a3c]');
+                    appendTerminalLine("Ketik 'bantuan' untuk melihat daftar perintah yang valid.", 'text-[#8a8a8a]');
+                    break;
+            }
+
+            terminalInput.value = '';
+            terminalOutput.scrollTop = terminalOutput.scrollHeight;
+        }
+
+        function clearTerminalScreen() {
+            terminalOutput.textContent = '';
+            appendTerminalLine('Layar terminal dibersihkan.', 'text-[#8a8a8a]');
+            appendTerminalLine("Ketik 'bantuan' untuk melihat daftar perintah.", 'text-[#8a8a8a]');
+        }
+
+        // -------------------------------------------------------------
+        // D. ACTIVE HIGHLIGHT BOTTOM NAV VIA INTERSECTION OBSERVER
+        // -------------------------------------------------------------
+        function setupScrollSpy() {
+            const trackedSections = document.querySelectorAll('section[id]');
+            const bottomNavItems = document.querySelectorAll('.bottom-nav-item');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '-20% 0px -55% 0px',
+                threshold: 0
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const currentId = entry.target.getAttribute('id');
+                        bottomNavItems.forEach(item => {
+                            const target = item.getAttribute('data-nav');
+                            if (target === currentId) {
+                                item.className = 'bottom-nav-item text-xs sm:text-sm font-semibold text-white transition-colors';
+                            } else {
+                                item.className = 'bottom-nav-item text-xs sm:text-sm font-medium text-[#8a8a8a] hover:text-white transition-colors';
+                            }
+                        });
+                    }
+                });
+            }, observerOptions);
+
+            trackedSections.forEach(sec => observer.observe(sec));
+
+            // Fade in top sticky bar hanya saat scroll melebihi hero
+            window.addEventListener('scroll', () => {
+                const topBar = document.getElementById('top-sticky-bar');
+                if (topBar) {
+                    if (window.scrollY > 300) {
+                        topBar.classList.remove('opacity-0', 'pointer-events-none');
+                        topBar.classList.add('opacity-100', 'pointer-events-auto');
+                    } else {
+                        topBar.classList.add('opacity-0', 'pointer-events-none');
+                        topBar.classList.remove('opacity-100', 'pointer-events-auto');
+                    }
+                }
+            }, { passive: true });
+        }
+
+        // -------------------------------------------------------------
+        // E. DATA & LOGIKA KEAHLIAN / TOOLKIT (Devicon SVG + Animasi)
+        // -------------------------------------------------------------
+        const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons';
+
+        const SKILLS_DATA = [
+            {
+                id: 'web',
+                num: '01',
+                title: 'Web Development',
+                icon: 'globe',
+                description: 'Pembangunan aplikasi web skala penuh: backend berbasis MVC (Laravel, CodeIgniter 4), basis data relasional MySQL, dan styling responsif modern (Tailwind CSS, Bootstrap).',
+                colSpan: 'md:col-span-2',
+                items: [
+                    { name: 'PHP', icon: 'php', variant: 'original' },
+                    { name: 'Laravel', icon: 'laravel', variant: 'original' },
+                    { name: 'CodeIgniter 4', icon: 'codeigniter', variant: 'plain' },
+                    { name: 'HTML5', icon: 'html5', variant: 'original' },
+                    { name: 'CSS3', icon: 'css3', variant: 'original' },
+                    { name: 'JavaScript', icon: 'javascript', variant: 'original' },
+                    { name: 'Tailwind CSS', icon: 'tailwindcss', variant: 'original' },
+                    { name: 'Bootstrap', icon: 'bootstrap', variant: 'original' },
+                    { name: 'MySQL', icon: 'mysql', variant: 'original' }
+                ]
+            },
+            {
+                id: 'mobile',
+                num: '02',
+                title: 'Mobile Development',
+                icon: 'smartphone',
+                description: 'Pengembangan aplikasi mobile lintas platform dengan single codebase yang konsisten, fluid, dan responsif di berbagai ukuran perangkat.',
+                colSpan: 'md:col-span-1',
+                items: [
+                    { name: 'Flutter', icon: 'flutter', variant: 'original' },
+                    { name: 'Dart', icon: 'dart', variant: 'original' }
+                ]
+            },
+            {
+                id: 'ai',
+                num: '03',
+                title: 'AI & Data',
+                icon: 'cpu',
+                description: 'Implementasi Convolutional Neural Network (MobileNetV2), pemrosesan citra real-time dengan OpenCV, pembuatan dashboard web via Streamlit, dan analitik visual Looker Studio.',
+                colSpan: 'md:col-span-1',
+                items: [
+                    { name: 'Python', icon: 'python', variant: 'original' },
+                    { name: 'TensorFlow', icon: 'tensorflow', variant: 'original' },
+                    { name: 'OpenCV', icon: 'opencv', variant: 'original' },
+                    { name: 'Streamlit', icon: 'streamlit', variant: 'original' },
+                    { name: 'Looker Studio', icon: null, fallback: 'bar-chart-3' }
+                ]
+            },
+            {
+                id: 'tools',
+                num: '04',
+                title: 'Creative & Tools',
+                icon: 'wrench',
+                description: 'Alat perancangan visual antarmuka UI/UX, manajemen version control kolaboratif, dan ekosistem server lokal pengembangan.',
+                colSpan: 'md:col-span-2',
+                items: [
+                    { name: 'Figma', icon: 'figma', variant: 'original' },
+                    { name: 'Canva', icon: 'canva', variant: 'original' },
+                    { name: 'VS Code', icon: 'vscode', variant: 'original' },
+                    { name: 'Git', icon: 'git', variant: 'original' },
+                    { name: 'GitHub', icon: 'github', variant: 'original', invert: true },
+                    { name: 'Laragon', icon: null, fallback: 'server' }
+                ]
+            }
+        ];
+
+        function iconUrl(item, variant = null) {
+            if (!item || !item.icon) return '';
+            const v = variant || item.variant || 'original';
+            return `${DEVICON_BASE}/${item.icon}/${item.icon}-${v}.svg`;
+        }
+
+        function handleIconError(img, iconName, fallbackName, initialLetter) {
+            if (!img) return;
+            const stage = img.dataset.stage || 'original';
+
+            if (stage === 'original') {
+                img.dataset.stage = 'plain';
+                img.src = `${DEVICON_BASE}/${iconName}/${iconName}-plain.svg`;
+            } else if (stage === 'plain') {
+                img.dataset.stage = 'fallback';
+                const parent = img.parentElement;
+                if (!parent) return;
+
+                if (fallbackName) {
+                    parent.innerHTML = `<i data-lucide="${fallbackName}" class="w-5 h-5 text-[#ff5a3c]"></i>`;
+                    if (window.lucide) lucide.createIcons();
+                } else {
+                    parent.innerHTML = `<span class="font-bold text-xs font-mono text-white/90">${initialLetter || '•'}</span>`;
+                }
+            }
+        }
+
+        function renderSkills() {
+            const container = document.getElementById('skills-bento-grid');
+            if (!container) return;
+
+            let html = '';
+            SKILLS_DATA.forEach(cat => {
+                const chipsHtml = cat.items.map((item, idx) => {
+                    const invertClass = item.invert ? 'filter invert brightness-125' : '';
+                    const delaySec = ((idx * 0.35) % 3).toFixed(2);
+                    const initialLetter = item.name.charAt(0);
+
+                    let badgeInner = '';
+                    if (item.icon) {
+                        badgeInner = `<img
+                            src="${iconUrl(item)}"
+                            alt=""
+                            aria-hidden="true"
+                            width="22"
+                            height="22"
+                            loading="lazy"
+                            decoding="async"
+                            class="w-5 h-5 sm:w-5.5 sm:h-5.5 object-contain ${invertClass}"
+                            onerror="handleIconError(this, '${item.icon}', '${item.fallback || ''}', '${initialLetter}')"
+                        >`;
+                    } else {
+                        badgeInner = `<i data-lucide="${item.fallback || 'box'}" class="w-5 h-5 text-[#ff5a3c]"></i>`;
+                    }
+
+                    return `
+                        <li class="skill-chip rounded-2xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 p-1.5 pr-4 flex items-center gap-3 transition-all focus-within:ring-2 focus-within:ring-[#ff5a3c]" style="--i: ${idx}">
+                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 skill-badge skill-badge-float" style="--d: ${delaySec}s">
+                                ${badgeInner}
+                            </div>
+                            <span class="text-xs sm:text-sm font-semibold tracking-tight text-white/90 whitespace-nowrap">${item.name}</span>
+                        </li>
+                    `;
+                }).join('');
+
+                html += `
+                    <div class="skill-card skill-reveal-init p-6 sm:p-8 rounded-3xl ${cat.colSpan}">
+                        <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 mb-6 border-b border-white/10">
+                            <div class="flex items-start gap-4 sm:gap-5">
+                                <span class="skill-num text-4xl sm:text-5xl select-none flex-shrink-0">${cat.num}</span>
+                                <div class="space-y-1.5">
+                                    <div class="flex items-center gap-2">
+                                        <i data-lucide="${cat.icon}" class="w-4 h-4 text-[#ff5a3c]"></i>
+                                        <h3 class="text-xl sm:text-2xl font-bold tracking-tight text-white">${cat.title}</h3>
+                                    </div>
+                                    <p class="text-xs sm:text-sm text-white/60 max-w-xl leading-relaxed">${cat.description}</p>
+                                </div>
+                            </div>
+                            <span class="skill-count self-start sm:self-center font-mono text-xs px-3 py-1 rounded-full bg-white/5 border border-white/10 text-white/80" data-target="${cat.items.length}">
+                                0 teknologi
+                            </span>
+                        </div>
+                        <ul class="flex flex-wrap gap-2.5 sm:gap-3" aria-label="Daftar keahlian ${cat.title}">
+                            ${chipsHtml}
+                        </ul>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        function initMarquee() {
+            const track = document.getElementById('skill-marquee-track');
+            if (!track) return;
+
+            const allItems = [];
+            SKILLS_DATA.forEach(cat => {
+                cat.items.forEach(item => allItems.push(item));
+            });
+
+            // Gandakan 2x agar loop berjalan mulus tanpa jeda
+            const displayList = [...allItems, ...allItems];
+
+            track.innerHTML = displayList.map(item => {
+                const invertClass = item.invert ? 'filter invert brightness-125' : '';
+                const initialLetter = item.name.charAt(0);
+                let inner = '';
+                if (item.icon) {
+                    inner = `<img
+                        src="${iconUrl(item)}"
+                        alt=""
+                        aria-hidden="true"
+                        width="24"
+                        height="24"
+                        loading="lazy"
+                        decoding="async"
+                        class="w-6 h-6 object-contain ${invertClass}"
+                        onerror="handleIconError(this, '${item.icon}', '${item.fallback || ''}', '${initialLetter}')"
+                    >`;
+                } else {
+                    inner = `<i data-lucide="${item.fallback || 'box'}" class="w-5 h-5 text-[#ff5a3c]"></i>`;
+                }
+
+                return `
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 hover:border-[#ff5a3c]/40 hover:scale-105 transition-all" title="${item.name}">
+                        ${inner}
+                    </div>
+                `;
+            }).join('');
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+        }
+
+        function initCountUp(counterEl) {
+            if (!counterEl) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const target = counterEl.getAttribute('data-target');
+                counterEl.textContent = `${target} teknologi`;
+                return;
+            }
+
+            const target = parseInt(counterEl.getAttribute('data-target'), 10) || 0;
+            const duration = 800;
+            const startTime = performance.now();
+
+            function update(now) {
+                const elapsed = now - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = Math.round(easeOut * target);
+                counterEl.textContent = `${current} teknologi`;
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+            requestAnimationFrame(update);
+        }
+
+        function initSkillReveal() {
+            const cards = document.querySelectorAll('.skill-card');
+            if (cards.length === 0) return;
+
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                cards.forEach(card => {
+                    card.classList.remove('skill-reveal-init');
+                    card.classList.add('skill-reveal-active', 'skill-in-view');
+                    const counter = card.querySelector('.skill-count');
+                    if (counter) initCountUp(counter);
+                });
+                return;
+            }
+
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('skill-reveal-active', 'skill-in-view');
+                        const counter = entry.target.querySelector('.skill-count');
+                        if (counter && !counter.dataset.counted) {
+                            counter.dataset.counted = 'true';
+                            initCountUp(counter);
+                        }
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+
+            cards.forEach(card => observer.observe(card));
+        }
+
+        function initSpotlight() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            const cards = document.querySelectorAll('.skill-card');
+
+            cards.forEach(card => {
+                let rAF = null;
+                card.addEventListener('pointermove', (e) => {
+                    if (rAF) cancelAnimationFrame(rAF);
+                    rAF = requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        card.style.setProperty('--mx', `${x}px`);
+                        card.style.setProperty('--my', `${y}px`);
+                    });
+                });
+
+                card.addEventListener('pointerleave', () => {
+                    card.style.setProperty('--mx', '-1000px');
+                    card.style.setProperty('--my', '-1000px');
+                });
+            });
+        }
+
+        function initTilt() {
+            if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const cards = document.querySelectorAll('.skill-card');
+            cards.forEach(card => {
+                let rAF = null;
+                card.addEventListener('pointermove', (e) => {
+                    if (rAF) cancelAnimationFrame(rAF);
+                    rAF = requestAnimationFrame(() => {
+                        const rect = card.getBoundingClientRect();
+                        const px = (e.clientX - rect.left) / rect.width;
+                        const py = (e.clientY - rect.top) / rect.height;
+                        const tiltX = (0.5 - py) * 6;
+                        const tiltY = (px - 0.5) * 6;
+                        card.style.transform = `perspective(1000px) rotateX(${tiltX.toFixed(2)}deg) rotateY(${tiltY.toFixed(2)}deg) translateY(-2px)`;
+                    });
+                });
+
+                card.addEventListener('pointerleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        }
+
+        function initSkillsSection() {
+            renderSkills();
+            initMarquee();
+            initSkillReveal();
+            initSpotlight();
+            initTilt();
+        }
+
+        // -------------------------------------------------------------
+        // F. INISIALISASI SETELAH DOM SIAP
+        // -------------------------------------------------------------
+        document.addEventListener('DOMContentLoaded', () => {
+            const yearEl = document.getElementById('current-year');
+            if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+            initSkillsSection();
+
+            if (window.lucide) {
+                lucide.createIcons();
+            }
+
+            setupScrollSpy();
+        });
+    </script>
+</body>
+</html>

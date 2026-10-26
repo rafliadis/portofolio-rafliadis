@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editorial Portrait Studio — Rafliadis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .hero-device-card {
+            border: 4px solid #000000;
+            border-radius: 2.75rem;
+            background-color: #f0f0ed;
+            box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35);
+        }
+    </style>
+</head>
+<body class="bg-[#121212] text-white min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-white/10 gap-4">
+            <div>
+                <span class="text-xs font-mono uppercase tracking-widest text-emerald-400">// Editorial Portrait Studio</span>
+                <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight mt-1">Sesuaikan Foto Hero Portofolio</h1>
+                <p class="text-xs sm:text-sm text-stone-400 mt-1">Ubah foto santai menjadi cutout portrait editorial hitam-putih kontras tinggi persis mockup Alex Graham.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="index.html" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-mono transition">
+                    &larr; Kembali ke Web
+                </a>
+            </div>
+        </div>
+
+        <!-- Workspace Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+            <!-- Panel Kontrol & Opsi (Kiri 5 Kolom) -->
+            <div class="lg:col-span-5 space-y-6">
+
+                <!-- 1. Langkah Cepat: Upload atau Pakai Foto Saat Ini -->
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-sm font-bold uppercase tracking-wider text-stone-300 font-mono">1. Sumber Foto</h2>
+                        <span id="load-status" class="text-[11px] font-mono text-emerald-400">assets/profile.png</span>
+                    </div>
+
+                    <div class="space-y-3">
+                        <button id="btn-load-current" class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/15 border border-white/10 text-xs font-semibold flex items-center justify-center gap-2 transition">
+                            <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            <span>Muat Ulang `assets/profile.png`</span>
+                        </button>
+
+                        <div class="relative border-2 border-dashed border-white/20 hover:border-emerald-400/60 rounded-xl p-4 text-center cursor-pointer transition" id="drop-zone">
+                            <input type="file" id="file-input" accept="image/*" class="absolute inset-0 opacity-0 cursor-pointer">
+                            <i data-lucide="upload-cloud" class="w-6 h-6 mx-auto text-stone-400 mb-1"></i>
+                            <p class="text-xs font-semibold">Tarik atau Pilih Foto Baru / Foto Cutout</p>
+                            <p class="text-[10px] text-stone-400 mt-0.5">Mendukung PNG transparan, JPG, atau WebP</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. AI Background Removal Opsi -->
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl p-5 space-y-4">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-stone-300 font-mono">2. Hapus Background (AI)</h2>
+                    <p class="text-xs text-stone-400 leading-relaxed">
+                        Agar teks raksasa tembus dan menyatu seperti Alex Graham, foto wajib memiliki latar belakang transparan.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-2">
+                        <button id="btn-run-browser-ai" class="py-2.5 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-black text-xs font-bold flex items-center justify-center gap-1.5 transition">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>AI Cutout Otomatis</span>
+                        </button>
+                        <a href="https://www.remove.bg/upload" target="_blank" rel="noopener noreferrer" class="py-2.5 px-3 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-semibold flex items-center justify-center gap-1.5 transition text-center">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                            <span>Via remove.bg</span>
+                        </a>
+                    </div>
+                    <div id="ai-progress" class="hidden text-xs font-mono text-emerald-400 text-center py-1">
+                        Memproses AI Segmentation... mohon tunggu sebentar.
+                    </div>
+                </div>
+
+                <!-- 3. Fine Tuning Editorial Filter -->
+                <div class="bg-[#1a1a1a] border border-white/10 rounded-2xl p-5 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 class="text-sm font-bold uppercase tracking-wider text-stone-300 font-mono">3. Grading Black & White</h2>
+                        <button id="btn-reset-filters" class="text-[11px] font-mono text-stone-400 hover:text-white">Reset Default</button>
+                    </div>
+
+                    <!-- Contrast -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-stone-300">Kontras (Deep Blacks)</span>
+                            <span id="val-contrast" class="font-mono text-stone-400">145%</span>
+                        </div>
+                        <input type="range" id="slider-contrast" min="100" max="220" value="145" class="w-full accent-emerald-500">
+                    </div>
+
+                    <!-- Brightness -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-stone-300">Kecerahan Highlight</span>
+                            <span id="val-brightness" class="font-mono text-stone-400">105%</span>
+                        </div>
+                        <input type="range" id="slider-brightness" min="80" max="140" value="105" class="w-full accent-emerald-500">
+                    </div>
+
+                    <!-- Zoom / Crop Scale -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-stone-300">Crop Zoom (Fokus Kepala &amp; Dada)</span>
+                            <span id="val-zoom" class="font-mono text-stone-400">1.0x</span>
+                        </div>
+                        <input type="range" id="slider-zoom" min="0.8" max="2.0" step="0.05" value="1.0" class="w-full accent-emerald-500">
+                    </div>
+
+                    <!-- Vertical Shift -->
+                    <div class="space-y-1.5">
+                        <div class="flex justify-between text-xs">
+                            <span class="text-stone-300">Posisi Vertikal</span>
+                            <span id="val-posy" class="font-mono text-stone-400">0 px</span>
+                        </div>
+                        <input type="range" id="slider-posy" min="-150" max="150" value="0" class="w-full accent-emerald-500">
+                    </div>
+                </div>
+
+                <!-- 4. Tombol Download & Simpan -->
+                <div class="space-y-2">
+                    <button id="btn-download" class="w-full py-3 px-5 rounded-2xl bg-white hover:bg-stone-200 text-black font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Unduh Hasil (`profile.png`)</span>
+                    </button>
+                    <p class="text-[11px] text-stone-400 text-center font-mono">
+                        Setelah diunduh, timpa file ke <code class="text-white">assets/profile.png</code> di folder proyek.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Live Mockup Preview (Kanan 7 Kolom) -->
+            <div class="lg:col-span-7 space-y-4">
+                <div class="flex items-center justify-between">
+                    <h2 class="text-sm font-bold uppercase tracking-wider text-stone-300 font-mono">Live Editorial Mockup Preview</h2>
+                    <span class="text-[11px] font-mono text-stone-400">Persis seperti di index.html</span>
+                </div>
+
+                <!-- Container Mockup (Persis Image #2 Alex Graham) -->
+                <div class="p-4 sm:p-6 rounded-3xl bg-[#dededb] flex items-center justify-center overflow-hidden">
+
+                    <div class="hero-device-card relative w-full h-[540px] sm:h-[600px] p-6 sm:p-8 flex flex-col justify-between overflow-hidden" style="isolation: isolate;">
+
+                        <!-- 1. BARIS ATAS -->
+                        <div class="flex items-center justify-between text-black font-semibold text-xs z-30 select-none">
+                            <span>&copy; Rafliadis — Editorial</span>
+                            <div class="flex gap-4 sm:gap-6">
+                                <span>About</span>
+                                <span>Projects</span>
+                                <span>Contact</span>
+                            </div>
+                        </div>
+
+                        <!-- 2. TEKS RAKSASA 'RAFLIADIS' DENGAN MIX-BLEND-DIFFERENCE -->
+                        <!-- Di latar terang menjadi HITAM, di atas baju/rambut gelap menjadi PUTIH MENGKILAP -->
+                        <div class="absolute inset-0 flex items-center justify-center pointer-events-none select-none z-20 overflow-visible">
+                            <h1 class="text-[clamp(3.5rem,15vw,11rem)] font-black tracking-tighter text-white mix-blend-difference leading-none whitespace-nowrap">
+                                Rafliadis
+                            </h1>
+                        </div>
+
+                        <!-- 3. FOTO PORTRAIT CUTOUT LIVE -->
+                        <div class="absolute inset-x-0 bottom-0 top-12 flex items-end justify-center pointer-events-none select-none z-10 overflow-hidden">
+                            <canvas id="preview-canvas" class="max-h-[92%] w-auto object-contain"></canvas>
+                        </div>
+
+                        <!-- 4. BARIS BAWAH -->
+                        <div class="flex items-end justify-between text-black z-30 select-none">
+                            <div class="flex flex-col gap-2.5">
+                                <i data-lucide="twitter" class="w-4 h-4"></i>
+                                <i data-lucide="linkedin" class="w-4 h-4"></i>
+                                <i data-lucide="instagram" class="w-4 h-4"></i>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xl sm:text-2xl font-bold leading-tight tracking-tight">
+                                    <span class="block">Software Engineer</span>
+                                    <span class="block text-black/75">Web &amp; AI Enthusiast</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="p-4 rounded-2xl bg-white/5 border border-white/10 text-xs text-stone-300 space-y-1">
+                    <p class="font-bold text-white flex items-center gap-1.5">
+                        <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400"></i>
+                        <span>Cara Kerja Efek Inverted Text 'Alex Graham':</span>
+                    </p>
+                    <p class="text-stone-400 leading-relaxed">
+                        Teks nama diberi gaya <code class="text-emerald-300">text-white mix-blend-difference</code>. Saat menyentuh latar kartu yang terang, ia berotasi menjadi warna hitam legam. Saat menyentuh siluet baju hitam dan rambut gelap Anda, hurufnya otomatis menyala menjadi putih bersih persis huruf "G" pada contoh foto Alex Graham!
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Hidden Canvas for Full-Res Export -->
+    <canvas id="export-canvas" class="hidden"></canvas>
+
+    <!-- Script Logika Canvas & Editorial Grading -->
+    <script>
+        lucide.createIcons();
+
+        let sourceImage = new Image();
+        let isLoaded = false;
+        let isCutout = false;
+
+        const previewCanvas = document.getElementById('preview-canvas');
+        const pctx = previewCanvas.getContext('2d');
+        const exportCanvas = document.getElementById('export-canvas');
+        const ectx = exportCanvas.getContext('2d');
+
+        const sliderContrast = document.getElementById('slider-contrast');
+        const sliderBrightness = document.getElementById('slider-brightness');
+        const sliderZoom = document.getElementById('slider-zoom');
+        const sliderPosY = document.getElementById('slider-posy');
+
+        const valContrast = document.getElementById('val-contrast');
+        const valBrightness = document.getElementById('val-brightness');
+        const valZoom = document.getElementById('val-zoom');
+        const valPosY = document.getElementById('val-posy');
+
+        // Load image
+        function loadImage(src) {
+            sourceImage.crossOrigin = 'anonymous';
+            sourceImage.onload = () => {
+                isLoaded = true;
+                document.getElementById('load-status').textContent = 'Foto Termuat (' + sourceImage.width + 'x' + sourceImage.height + ')';
+                render();
+            };
+            sourceImage.onerror = () => {
+                document.getElementById('load-status').textContent = 'Gagal memuat assets/profile.png';
+            };
+            sourceImage.src = src;
+        }
+
+        loadImage('assets/profile.png');
+
+        // File upload handling
+        document.getElementById('file-input').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = (evt) => {
+                isCutout = true;
+                loadImage(evt.target.result);
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('btn-load-current').addEventListener('click', () => {
+            loadImage('assets/profile.png?' + Date.now());
+        });
+
+        // Sliders event
+        [sliderContrast, sliderBrightness, sliderZoom, sliderPosY].forEach(el => {
+            el.addEventListener('input', () => {
+                valContrast.textContent = sliderContrast.value + '%';
+                valBrightness.textContent = sliderBrightness.value + '%';
+                valZoom.textContent = parseFloat(sliderZoom.value).toFixed(2) + 'x';
+                valPosY.textContent = sliderPosY.value + ' px';
+                render();
+            });
+        });
+
+        document.getElementById('btn-reset-filters').addEventListener('click', () => {
+            sliderContrast.value = 145;
+            sliderBrightness.value = 105;
+            sliderZoom.value = 1.0;
+            sliderPosY.value = 0;
+            valContrast.textContent = '145%';
+            valBrightness.textContent = '105%';
+            valZoom.textContent = '1.0x';
+            valPosY.textContent = '0 px';
+            render();
+        });
+
+        // Render function: Crop, Grayscale, High Contrast, Alpha Mask
+        function render() {
+            if (!isLoaded) return;
+
+            const sw = sourceImage.width;
+            const sh = sourceImage.height;
+
+            // Crop head & shoulders jika gambar asli masih full body (aspek ratio tinggi > 1.3)
+            let sx = 0, sy = 0, sWidth = sw, sHeight = sh;
+            if (sh / sw > 1.3 && !isCutout) {
+                // Koordinat Rafli di beach: dada sampai kepala
+                sx = sw * 0.22;
+                sy = sh * 0.26;
+                sWidth = sw * 0.56;
+                sHeight = sh * 0.36;
+            }
+
+            const targetW = 900;
+            const targetH = Math.round(targetW * (sHeight / sWidth));
+
+            previewCanvas.width = targetW;
+            previewCanvas.height = targetH;
+
+            pctx.clearRect(0, 0, targetW, targetH);
+
+            // Filter settings
+            const contrast = sliderContrast.value;
+            const brightness = sliderBrightness.value;
+            pctx.filter = `grayscale(100%) contrast(${contrast}%) brightness(${brightness}%)`;
+
+            const zoom = parseFloat(sliderZoom.value);
+            const posY = parseInt(sliderPosY.value, 10);
+
+            const drawW = targetW * zoom;
+            const drawH = targetH * zoom;
+            const drawX = (targetW - drawW) / 2;
+            const drawY = (targetH - drawH) + posY;
+
+            pctx.drawImage(sourceImage, sx, sy, sWidth, sHeight, drawX, drawY, drawW, drawH);
+            pctx.filter = 'none';
+        }
+
+        // AI Cutout via in-browser segmentation
+        document.getElementById('btn-run-browser-ai').addEventListener('click', async () => {
+            const prog = document.getElementById('ai-progress');
+            prog.classList.remove('hidden');
+            prog.textContent = 'Sedang memuat AI model segmentation...';
+
+            try {
+                // Dynamically import @imgly/background-removal
+                const { removeBackground } = await import('https://cdn.jsdelivr.net/npm/@imgly/background-removal@1.4.5/+esm');
+                prog.textContent = 'AI sedang memotong latar belakang secara presisi...';
+
+                // Buat canvas sementara untuk gambar yang sudah dicrop kepala & dada
+                const tempCanvas = document.createElement('canvas');
+                const tctx = tempCanvas.getContext('2d');
+                const sw = sourceImage.width;
+                const sh = sourceImage.height;
+
+                let sx = sw * 0.22, sy = sh * 0.26, sWidth = sw * 0.56, sHeight = sh * 0.36;
+                tempCanvas.width = 1000;
+                tempCanvas.height = Math.round(1000 * (sHeight / sWidth));
+                tctx.drawImage(sourceImage, sx, sy, sWidth, sHeight, 0, 0, tempCanvas.width, tempCanvas.height);
+
+                const blob = await new Promise(res => tempCanvas.toBlob(res, 'image/png'));
+                const cutoutBlob = await removeBackground(blob, {
+                    progress: (key, current, total) => {
+                        prog.textContent = `Memproses: ${Math.round((current/total)*100)}%`;
+                    }
+                });
+
+                const cutoutUrl = URL.createObjectURL(cutoutBlob);
+                isCutout = true;
+                loadImage(cutoutUrl);
+                prog.textContent = 'Selesai! Latar belakang berhasil dihilangkan!';
+                setTimeout(() => prog.classList.add('hidden'), 3000);
+            } catch (err) {
+                console.error(err);
+                prog.innerHTML = '<span class="text-rose-400">Gunakan remove.bg untuk hasil instan: klik tombol di samping!</span>';
+            }
+        });
+
+        // Download button
+        document.getElementById('btn-download').addEventListener('click', () => {
+            const link = document.createElement('a');
+            link.download = 'profile.png';
+            link.href = previewCanvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
+</body>
+</html>
